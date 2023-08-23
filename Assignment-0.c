@@ -91,17 +91,53 @@ int read_pgm(char *file, void *image, uint32_t x, uint32_t y)
   return 0;
 }
 
+int convolution(void *out, void *image, void *K, uint32_t out_x, uint32_t out_y, uint32_t K_x, uint32_t K_y) {
+    int accumulator;
+    for(int r = 0; r < out_x; r++) {
+        for(int c = 0; c < out_y; c++) {
+            accumulator=0;
+            for(int i = 0; i < K_x; i++) {
+                for(int j = 0; j < K_y; j++) {
+                    accumulator = accumulator + K[j][i] * image[r + (j - (int) ceil(3/2))][c + (int) (i - ceil(3/2))];
+                }
+            }
+            out[r][c] = accumulator;
+        }
+    }
+    return 1;
+}
+
 int main(int argc, char *argv[])
 {
   int8_t image[1024][1024];
   int8_t out[1024][1024];
+  int8_t out_x[1024][1024];
+  int8_t out_y[1024][1024];
   
   /* Example usage of PGM functions */
   /* This assumes that motorcycle.pgm is a pgm image of size 1024x1024 */
+  /* This method seems to copy what is in motorcycle.pgm and put it into image */
   read_pgm("motorcycle.pgm", image, 1024, 1024);
+
+  int accumulator;
+  int8_t K_x[3][3] = {
+          {},
+          {},
+          {}
+  };
+
+  convolution(out_x, image, K_x, 1024, 1024, 3, 3);
+
+  int8_t K_y[3][3] = {
+          {},
+          {},
+          {}
+  };
+  convolution(out_y, image, K_y, 1024, 1024, 3, 3);
 
   /* After processing the image and storing your output in "out", write *
    * to motorcycle.edge.pgm.                                            */
+    /* This method just writes from out to motorcycle.edge.pgm */
   write_pgm("motorcycle.edge.pgm", out, 1024, 1024);
   
   return 0;
