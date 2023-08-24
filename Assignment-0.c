@@ -160,7 +160,7 @@ int main(int argc, char *argv[]) {
 
     for (int i = 0; i < 1024; i++) {
         for (int j = 0; j < 1024; j++) {
-            out[i][j] = sqrt(out_x2[i][j] + out_y2[i][j]);
+            out[i][j] = (int8_t) sqrt(out_x2[i][j] + out_y2[i][j]);
         }
     }
 
