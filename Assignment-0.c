@@ -114,8 +114,8 @@ int main(int argc, char *argv[]) {
         for (int c = 0; c < 1024; c++) {
             accumulator_x = 0;
             accumulator_y = 0;
-            for (int i = 0; i < 3; i++) {
-                for (int j = 0; j < 3; j++) {
+            for (int j = 0; j < 3; j++) {
+                for (int i = 0; i < 3; i++) {
                     accumulator_x = accumulator_x +
                                     K_x[j][i] * (int) (image[r + (j - (int) ceil(3 / 2))][c + (int) (i - ceil(3 / 2))]);
                     accumulator_y = accumulator_y +
