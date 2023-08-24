@@ -113,10 +113,10 @@ int main(int argc, char *argv[]) {
             for (int i = 0; i < 3; i++) {
                 for (int j = 0; j < 3; j++) {
                     accumulator_x = accumulator_x +
-                                    K_x[j][i] * image[r + (j - (int) ceil(3 / 2))][c + (int) (i - ceil(3 / 2))];
+                                    K_x[j][i] * (int) (image[r + (j - (int) ceil(3 / 2))][c + (int) (i - ceil(3 / 2))]) * 2;
                 }
             }
-            out_x[r][c] = accumulator_x;
+            out_x[r][c] = abs(accumulator_x) > 255 ? 255 : accumulator_x;
         }
     }
 
