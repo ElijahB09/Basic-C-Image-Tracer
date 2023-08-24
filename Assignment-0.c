@@ -126,7 +126,7 @@ int main(int argc, char *argv[]) {
             } else if (accumulator_x < -255) {
                 accumulator_x = -255;
             }
-            out_x[r][c] = accumulator_x
+            out_x[r][c] = accumulator_x;
         }
     }
 
@@ -144,7 +144,7 @@ int main(int argc, char *argv[]) {
             } else if (accumulator_y < -255) {
                 accumulator_y = -255;
             }
-            out_y[r][c] = accumulator_y
+            out_y[r][c] = accumulator_y;
         }
     }
 
