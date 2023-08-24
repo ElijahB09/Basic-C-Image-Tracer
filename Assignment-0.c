@@ -117,9 +117,9 @@ int main(int argc, char *argv[]) {
             for (int j = 0; j < 3; j++) {
                 for (int i = 0; i < 3; i++) {
                     accumulator_x = accumulator_x +
-                                    K_x[j][i] * (int) (image[r + (j - (int) ceil(3 / 2))][c + (int) (i - ceil(3 / 2))]);
+                                    K_x[j][i] * (int) ((image[r + (j - (int) ceil(3 / 2))][c + (int) (i - ceil(3 / 2))]) * 2);
                     accumulator_y = accumulator_y +
-                                    K_y[j][i] * (int) (image[r + (j - (int) ceil(3 / 2))][c + (int) (i - ceil(3 / 2))]);
+                                    K_y[j][i] * (int) ((image[r + (j - (int) ceil(3 / 2))][c + (int) (i - ceil(3 / 2))]) * 2);
                 }
             }
             if (accumulator_x > 255) {
