@@ -140,13 +140,6 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    // Matrix multiplication for x and y matrices
-    for (int i = 0; i < 1024; i++) {
-        for (int j = 0; j < 1024; j++) {
-            out[i][j] = (int8_t) sqrt((out_x[i][j] * out_x[i][j]) + (out_y[i][j] * out_y[i][j]));
-        }
-    }
-
     /* After processing the image and storing your output in "out", write *
      * to motorcycle.edge.pgm.                                            */
     /* This method just writes from out to motorcycle.edge.pgm */
