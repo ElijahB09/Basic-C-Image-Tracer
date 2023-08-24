@@ -106,7 +106,6 @@ int main(int argc, char *argv[]) {
             {1,  2,  1}
     };
     int accumulator_y;
-    int accumulator;
 
     /* Example usage of PGM functions */
     /* This assumes that motorcycle.pgm is a pgm image of size 1024x1024 */
@@ -125,16 +124,19 @@ int main(int argc, char *argv[]) {
                                     K_y[j][i] * (int) (image[r + (j - (int) ceil(3 / 2))][c + (int) (i - ceil(3 / 2))]) * 2;
                 }
             }
-
-            accumulator = (int) sqrt((accumulator_x * accumulator_x) + (accumulator_y * accumulator_y));
-
-            if (accumulator > 255) {
-                accumulator = 255;
-            } else if (accumulator < -255) {
-                accumulator = -255;
+            if ((accumulator_x * accumulator_x) + (accumulator_y * accumulator_y) > 255) {
+                accumulator_x = 255;
+            } else if ((accumulator_x * accumulator_x) + (accumulator_y * accumulator_y) < -255) {
+                accumulator_x = -255;
             }
 
-            out[r][c] = (int8_t) accumulator;
+            if (accumulator_y > 255) {
+                accumulator_y = 255;
+            } else if (accumulator_y < -255) {
+                accumulator_y = -255;
+            }
+
+            out[r][c] = (int8_t) sqrt(accumulator_x * accumulator_x);
         }
     }
 
