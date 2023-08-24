@@ -138,6 +138,8 @@ int main(int argc, char *argv[]) {
             out_y[r][c] = accumulator_y;
         }
     }
+
+    // Matrix multiplication for x and y matrices
     int8_t out_x2[1024][1024];
     for (int i = 0; i < 1024; i++) {
         for (int j = 0; j < 1024; j++) {
