@@ -115,10 +115,13 @@ int main(int argc, char *argv[]) {
     for (int r = 0; r < 1024; r++) {
         for (int c = 0; c < 1024; c++) {
             accumulator_x = 0;
+            accumulator_y = 0;
             for (int i = 0; i < 3; i++) {
                 for (int j = 0; j < 3; j++) {
                     accumulator_x = accumulator_x +
                                     K_x[j][i] * (int) (image[r + (j - (int) ceil(3 / 2))][c + (int) (i - ceil(3 / 2))]) * 2;
+                    accumulator_y = accumulator_y +
+                                    K_y[j][i] * (int) (image[r + (j - (int) ceil(3 / 2))][c + (int) (i - ceil(3 / 2))]) * 2;
                 }
             }
             if (accumulator_x > 255) {
@@ -126,25 +129,14 @@ int main(int argc, char *argv[]) {
             } else if (accumulator_x < -255) {
                 accumulator_x = -255;
             }
-            out_x[r][c] = accumulator_x;
-        }
-    }
+            out_x[r][c] = (int8_t) accumulator_x;
 
-    for (int r = 0; r < 1024; r++) {
-        for (int c = 0; c < 1024; c++) {
-            accumulator_y = 0;
-            for (int i = 0; i < 3; i++) {
-                for (int j = 0; j < 3; j++) {
-                    accumulator_y = accumulator_y +
-                                    K_y[j][i] * (int) (image[r + (j - (int) ceil(3 / 2))][c + (int) (i - ceil(3 / 2))]) * 2;
-                }
-            }
             if (accumulator_y > 255) {
                 accumulator_y = 255;
             } else if (accumulator_y < -255) {
                 accumulator_y = -255;
             }
-            out_y[r][c] = accumulator_y;
+            out_y[r][c] = (int8_t) accumulator_y;
         }
     }
 
