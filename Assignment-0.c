@@ -124,9 +124,9 @@ int main(int argc, char *argv[]) {
                                     K_y[j][i] * (int) (image[r + (j - (int) ceil(3 / 2))][c + (int) (i - ceil(3 / 2))]) * 2;
                 }
             }
-            if ((accumulator_x * accumulator_x) + (accumulator_y * accumulator_y) > 255) {
+            if (accumulator_x > 255) {
                 accumulator_x = 255;
-            } else if ((accumulator_x * accumulator_x) + (accumulator_y * accumulator_y) < -255) {
+            } else if (accumulator_x < -255) {
                 accumulator_x = -255;
             }
 
@@ -136,7 +136,7 @@ int main(int argc, char *argv[]) {
                 accumulator_y = -255;
             }
 
-            out[r][c] = (int8_t) sqrt(accumulator_x * accumulator_x);
+            out[r][c] = (int8_t) sqrt((accumulator_x * accumulator_x) + (accumulator_y * accumulator_y));
         }
     }
 
