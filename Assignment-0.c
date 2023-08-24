@@ -126,7 +126,7 @@ int main(int argc, char *argv[]) {
                 }
             }
 
-            accumulator = (accumulator_x * accumulator_x) + (accumulator_y * accumulator_y);
+            accumulator = (int) sqrt((accumulator_x * accumulator_x) + (accumulator_y * accumulator_y));
 
             if (accumulator > 255) {
                 accumulator = 255;
@@ -134,7 +134,7 @@ int main(int argc, char *argv[]) {
                 accumulator = -255;
             }
 
-            out[r][c] = (int8_t) sqrt(accumulator);
+            out[r][c] = (int8_t) accumulator;
         }
     }
 
