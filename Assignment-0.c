@@ -92,8 +92,6 @@ int read_pgm(char *file, void *image, uint32_t x, uint32_t y) {
 int main(int argc, char *argv[]) {
     int8_t image[1024][1024];
     int8_t out[1024][1024];
-    int8_t out_x[1024][1024];
-    int8_t out_y[1024][1024];
     int8_t K_x[3][3] = {
             {-1, 0, 1},
             {-2, 0, 2},
@@ -124,17 +122,17 @@ int main(int argc, char *argv[]) {
                                     K_y[j][i] * (int) (image[r + (j - (int) ceil(3 / 2))][c + (int) (i - ceil(3 / 2))]);
                 }
             }
-            if (accumulator_x > 255) {
-                accumulator_x = 255;
-            } else if (accumulator_x < -255) {
-                accumulator_x = -255;
-            }
-
-            if (accumulator_y > 255) {
-                accumulator_y = 255;
-            } else if (accumulator_y < -255) {
-                accumulator_y = -255;
-            }
+//            if (accumulator_x > 255) {
+//                accumulator_x = 255;
+//            } else if (accumulator_x < -255) {
+//                accumulator_x = -255;
+//            }
+//
+//            if (accumulator_y > 255) {
+//                accumulator_y = 255;
+//            } else if (accumulator_y < -255) {
+//                accumulator_y = -255;
+//            }
 
             out[r][c] = (int8_t) sqrt((accumulator_x * accumulator_x) + (accumulator_y * accumulator_y));
         }
