@@ -119,7 +119,7 @@ int main(int argc, char *argv[]) {
     /* Example usage of PGM functions */
     /* This assumes that motorcycle.pgm is a pgm image of size 1024x1024 */
     /* This method seems to copy what is in motorcycle.pgm and put it into image */
-    read_pgm(argv[1], image, 1024, 1024);
+    read_pgm(strcat(file_name, ".pgm"), image, 1024, 1024);
 
     for (r = 0; r < 1024; r++) {
         for (c = 0; c < 1024; c++) {
