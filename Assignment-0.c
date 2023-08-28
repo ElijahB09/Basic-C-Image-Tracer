@@ -109,8 +109,6 @@ int main(int argc, char *argv[]) {
             {1,  2,  1}
     };
     int accumulator_y;
-    char *file_name = strtok(argv[1], ".");
-    char file_output_extension[255] = ".edge.pgm";
     int r;
     int c;
     int i;
@@ -119,7 +117,7 @@ int main(int argc, char *argv[]) {
     /* Example usage of PGM functions */
     /* This assumes that motorcycle.pgm is a pgm image of size 1024x1024 */
     /* This method seems to copy what is in motorcycle.pgm and put it into image */
-    read_pgm(strcat(file_name, ".pgm"), image, 1024, 1024);
+    read_pgm(argv[1], image, 1024, 1024);
 
     for (r = 0; r < 1024; r++) {
         for (c = 0; c < 1024; c++) {
@@ -148,6 +146,9 @@ int main(int argc, char *argv[]) {
             out[r][c] = (uint8_t) sqrt((accumulator_x * accumulator_x) + (accumulator_y * accumulator_y));
         }
     }
+
+    char *file_name = strtok(argv[1], ".");
+    char file_output_extension[255] = ".edge.pgm";
 
     /* After processing the image and storing your output in "out", write *
      * to motorcycle.edge.pgm.                                            */
