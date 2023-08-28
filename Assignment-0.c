@@ -90,6 +90,11 @@ int read_pgm(char *file, void *image, uint32_t x, uint32_t y) {
 }
 
 int main(int argc, char *argv[]) {
+    if (argc < 2) {
+        printf("missing filename\n");
+        exit(1);
+    }
+
     uint8_t image[1024][1024];
     uint8_t out[1024][1024];
     int8_t K_x[3][3] = {
@@ -104,18 +109,24 @@ int main(int argc, char *argv[]) {
             {1,  2,  1}
     };
     int accumulator_y;
+    char *file_name = strtok(argv[1], ".");
+    char file_output_extension[255] = ".edge.pgm";
+    int r;
+    int c;
+    int i;
+    int j;
 
     /* Example usage of PGM functions */
     /* This assumes that motorcycle.pgm is a pgm image of size 1024x1024 */
     /* This method seems to copy what is in motorcycle.pgm and put it into image */
-    read_pgm("motorcycle.pgm", image, 1024, 1024);
+    read_pgm(argv[1], image, 1024, 1024);
 
-    for (int r = 0; r < 1024; r++) {
-        for (int c = 0; c < 1024; c++) {
+    for (r = 0; r < 1024; r++) {
+        for (c = 0; c < 1024; c++) {
             accumulator_x = 0;
             accumulator_y = 0;
-            for (int j = 0; j < 3; j++) {
-                for (int i = 0; i < 3; i++) {
+            for (j = 0; j < 3; j++) {
+                for (i = 0; i < 3; i++) {
                     accumulator_x = accumulator_x +
                             K_x[j][i] * (int) (image[r + (j - (int) ceil(3 / 2))][c + (int) (i - ceil(3 / 2))]);
                     accumulator_y = accumulator_y +
@@ -141,7 +152,7 @@ int main(int argc, char *argv[]) {
     /* After processing the image and storing your output in "out", write *
      * to motorcycle.edge.pgm.                                            */
     /* This method just writes from out to motorcycle.edge.pgm */
-    write_pgm("motorcycle.edge.pgm", out, 1024, 1024);
+    write_pgm(strcat(file_name, file_output_extension), out, 1024, 1024);
 
     return 0;
 }
