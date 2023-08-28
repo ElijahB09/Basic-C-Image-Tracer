@@ -124,14 +124,14 @@ int main(int argc, char *argv[]) {
             }
             if (accumulator_x > 255) {
                 accumulator_x = 255;
-            } else if (accumulator_x < -255) {
-                accumulator_x = -255;
+            } else if (accumulator_x < 0) {
+                accumulator_x = 0;
             }
 
             if (accumulator_y > 255) {
                 accumulator_y = 255;
-            } else if (accumulator_y < -255) {
-                accumulator_y = -255;
+            } else if (accumulator_y < 0) {
+                accumulator_y = 0;
             }
 
             out[r][c] = (int8_t) sqrt((accumulator_x * accumulator_x) + (accumulator_y * accumulator_y));
